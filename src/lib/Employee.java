@@ -24,8 +24,14 @@ public class Employee {
 		familyInfo2.addChild(child);
 	}
 	
-	public int getAnnualIncomeTax(EmploymentInfo employment, SpouseInfo spouse, ChildInfo child, FamilyInfo family, Salary salary) {
-		
-		return TaxFunction.calculateTax(salary.getMonthlySalary(), salary.getOtherMonthlyIncome(), employment.getMonthsWorkedThisYear(), salary.getAnnualDeductible(), spouse.getIdNumber(), family.getNumberOfChildren());
+	public int getAnnualIncomeTax(Salary salary) {
+	    return TaxFunction.calculateTax(
+	        salary.getMonthlySalary(),
+	        salary.getOtherMonthlyIncome(),
+	        EmploymentInfo.getMonthsWorkedThisYear(),
+	        salary.getAnnualDeductible(),
+	        familyInfo.hasSpouse(),
+	        familyInfo.getNumberOfChildren()
+	    );
 	}
 }
